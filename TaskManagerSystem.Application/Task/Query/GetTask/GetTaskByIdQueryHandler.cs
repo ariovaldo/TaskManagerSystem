@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using System.Net;
+using TaskManagerSystem.Application.Task.Query.Response;
 using TaskManagerSystem.Domain.Base;
 using TaskManagerSystem.Domain.Interfaces.Repository;
 using TaskManagerSystem.Domain.Task;

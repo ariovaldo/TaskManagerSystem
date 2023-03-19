@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TaskManagerSystem.Domain\TaskManagerSystem.Domain.csproj" />
+    <ProjectReference Include="..\TaskManagerSystem.Infra.Adapter\TaskManagerSystem.Infra.Adapter.csproj" />
     <ProjectReference Include="..\TaskManagerSystem.Infra.Data\TaskManagerSystem.Infra.Data.csproj" />
   </ItemGroup>
 

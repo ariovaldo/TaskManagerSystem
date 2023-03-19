@@ -1,8 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Exceptions;
 using Serilog.Sinks.Elasticsearch;
@@ -10,7 +8,10 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using TaskManagerSystem.API.Middleware;
 using TaskManagerSystem.Application.AutoMapper;
+using TaskManagerSystem.Application.Services.MessageBus;
+using TaskManagerSystem.Domain.Interfaces.MessageBus;
 using TaskManagerSystem.Domain.Interfaces.Repository;
+using TaskManagerSystem.Infra.Adapter.Configuration;
 using TaskManagerSystem.Infra.Data.Context;
 using TaskManagerSystem.Infra.Data.Repository;
 
@@ -19,7 +20,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-
 builder.Services.AddControllers()
                 .AddJsonOptions(cfg =>
                 {
@@ -27,18 +27,18 @@ builder.Services.AddControllers()
                     cfg.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     cfg.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                 });
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 builder.Services.AddDbContext<TaskManagerSystemContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped<ISendMessage, SendMessageService>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(AppDomain.CurrentDomain.Load("TaskManagerSystem.Application")));
 ConfigureLogging();
 builder.Services.AddLogging();
 builder.Host.UseSerilog();
+builder.Services.Configure<RabbitMQConfiguration>(builder.Configuration.GetSection("RabbitMQConfiguration"));
+
 
 var config = new MapperConfiguration(cfg =>
 {

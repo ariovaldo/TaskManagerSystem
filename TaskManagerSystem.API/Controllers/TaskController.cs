@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagerSystem.Application.Task.Command.InsertTask;
+using TaskManagerSystem.Application.Task.Command.InsertTaskCommandMessage;
 using TaskManagerSystem.Application.Task.Command.UpdateTask;
 using TaskManagerSystem.Application.Task.Query.GetAllTasks;
 using TaskManagerSystem.Application.Task.Query.GetTask;
@@ -45,6 +46,13 @@ namespace TaskManagerSystem.API.Controllers
 
         [HttpPost]
         public async Task<IActionResult> InsertTask([FromBody] InsertTaskCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [HttpPost("message")]
+        public async Task<IActionResult> InsertTaskMessage([FromBody] InsertTaskMessageCommand request)
         {
             var response = await _mediator.Send(request);
             return StatusCode(response.StatusCode, response);
