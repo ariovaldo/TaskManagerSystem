@@ -12,6 +12,8 @@ namespace TaskManagerSystem.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Produces("application/json")]
+    [Consumes("application/json")]
     public class TaskController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,7 +23,11 @@ namespace TaskManagerSystem.API.Controllers
             _mediator = mediator;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetAllTasksQuery request )
         {
