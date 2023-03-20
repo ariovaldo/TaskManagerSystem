@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Channels;
 using TaskManagerSystem.Infra.Adapter.Configuration;
@@ -55,8 +57,14 @@ namespace TaskManagerSystem.Infra.Adapter.RabbitMQ
             _channel.QueueDeclare(queue: _rabbitConfig.Queue,
                                   durable: true,
                                   exclusive: false,
-                                  autoDelete: false);
+                                  autoDelete: false,
+                                  arguments: null);
             return this;
+        }
+
+        public IModel GetChannel()
+        {
+            return _channel;
         }
 
         //public RabbitProvider WithExchange()
@@ -104,6 +112,17 @@ namespace TaskManagerSystem.Infra.Adapter.RabbitMQ
                 strMessage = JsonConvert.SerializeObject(message);
             }
             return Encoding.UTF8.GetBytes(strMessage);
+        }
+
+        public TResult ConvertByteArrayToMessage<TResult>(Byte[]? body)
+        {
+            if (body != null)
+            {
+                var message = Encoding.UTF8.GetString(body);
+                return JsonConvert.DeserializeObject<TResult>(message);
+            }
+            else
+                return default(TResult);
         }
 
         public void Dispose()

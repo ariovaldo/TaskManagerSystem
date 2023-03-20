@@ -8,6 +8,6 @@ namespace TaskManagerSystem.Domain.Interfaces.MessageBus
 {
     public interface IReceiveMessage
     {
-        void ReceiveMessage<T>(T message);
+        IEnumerable<TResult> ReceiveMessage<TResult>();
     }
 }

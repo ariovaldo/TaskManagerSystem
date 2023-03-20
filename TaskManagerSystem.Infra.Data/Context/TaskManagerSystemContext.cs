@@ -17,11 +17,6 @@ namespace TaskManagerSystem.Infra.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            //modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
-
-            // Configurações personalizadas das entidades
-            //modelBuilder.ApplyConfiguration(new AirfieldConfigurations());
         }
 
 
@@ -43,19 +38,6 @@ namespace TaskManagerSystem.Infra.Data.Context
                         entity.UpdatedAt = now;
 
                 }
-
-                //todo: Ari - remover
-                //else if (entry.Entity is IBaseEntity entity2)
-                //{
-                //    DateTime now = DateTime.UtcNow;
-                //    if (entry.State == EntityState.Added)
-                //    {
-                //        entity2.CreatedAt = now;
-                //        entity2.UpdatedAt = now;
-                //    }
-                //    else if (entry.State == EntityState.Modified)
-                //        entity2.UpdatedAt = now;
-                //}
             }
 
             return base.SaveChangesAsync(cancellationToken);

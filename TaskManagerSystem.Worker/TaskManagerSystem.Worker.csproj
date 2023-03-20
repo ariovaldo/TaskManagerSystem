@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-TaskManagerSystem.Worker-5cc2d7ae-2c76-4c96-819a-8f4aad281c07</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.10.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaskManagerSystem.Application\TaskManagerSystem.Application.csproj" />
+    <ProjectReference Include="..\TaskManagerSystem.Domain\TaskManagerSystem.Domain.csproj" />
+    <ProjectReference Include="..\TaskManagerSystem.Infra.Adapter\TaskManagerSystem.Infra.Adapter.csproj" />
+  </ItemGroup>
+</Project>
