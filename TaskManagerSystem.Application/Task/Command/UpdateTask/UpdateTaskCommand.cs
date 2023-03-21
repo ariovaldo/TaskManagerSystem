@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using TaskManagerSystem.Domain.Base;
+using TaskManagerSystem.Domain.Task;
 
 namespace TaskManagerSystem.Application.Task.Command.UpdateTask
 {
@@ -14,5 +15,6 @@ namespace TaskManagerSystem.Application.Task.Command.UpdateTask
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
+        public TaskStatusEnum Status { get; set; }
     }
 }

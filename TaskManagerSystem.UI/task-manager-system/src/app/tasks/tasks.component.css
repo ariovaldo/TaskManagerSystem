@@ -1,0 +1,13 @@
+table {
+  width: 80%;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  background-color: azure;
+  cursor: pointer;
+}

@@ -9,15 +9,21 @@ namespace TaskManagerSystem.Domain.Task
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
-        public TaskStatusEnum Status { get; private set; }
+        public TaskStatusEnum Status { get; private set; } 
 
-        public SimpleTask()
+        public SimpleTask(string title)
         {
+            if (String.IsNullOrWhiteSpace(title)) throw new ArgumentNullException(nameof(title));
 
+            Title = title;
+            Date = DateTime.Now;
+            Status = TaskStatusEnum.Todo;
         }
 
         public SimpleTask(string title, string description, DateTime date)  
         {
+            if (String.IsNullOrWhiteSpace(title)) throw new ArgumentNullException(nameof(title));
+
             Title = title;
             Description = description;
             Date = date;

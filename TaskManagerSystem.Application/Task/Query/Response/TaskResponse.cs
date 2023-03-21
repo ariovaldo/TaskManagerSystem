@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagerSystem.Domain.Task;
 
-namespace TaskManagerSystem.Application.Task.Query
+namespace TaskManagerSystem.Application.Task.Query.Response
 {
     public class TaskResponse
     {
