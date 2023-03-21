@@ -70,6 +70,12 @@ app.MapControllers();
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true) // allow any origin 
+    .AllowCredentials());
+
 app.Run();
 
 
@@ -85,7 +91,7 @@ void ConfigureLogging()
         .Enrich.FromLogContext()
         .Enrich.WithExceptionDetails()
         //.WriteTo.Debug()
-        //.WriteTo.Console()
+        .WriteTo.Console()
         .WriteTo.Elasticsearch(ConfigureElasticSink(configuration, environment))
         .Enrich.WithProperty("Environment", environment)
         .ReadFrom.Configuration(configuration)
