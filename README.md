@@ -20,7 +20,7 @@ Antes de começar, certifique-se de ter instalado as seguintes ferramentas:
 ## Instalação e Configuração
 
 1. Clone o repositório para sua máquina local
-2. Navegue até a pasta XXX onde o arquivo docker-compose.yml está localizado.
+2. Navegue até a pasta raíz do projeto onde o arquivo docker-compose.yml está localizado.
 3. Execute o seguinte comando para iniciar os serviços:
 
 ```bash
