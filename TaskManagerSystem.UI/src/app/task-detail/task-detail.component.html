@@ -1,15 +1,3 @@
- <!-- <div *ngIf="task">
-    <h2>{{task.title | uppercase}} Details</h2>
-    <div><span>id: </span>{{task.id}}</div>
-    <div>
-      <label for="task-title">Task name: </label>
-      <input id="task-title" [(ngModel)]="task.title" placeholder="Task title"/>
-    </div>
-    <button type="button" (click)="save()">save</button>
-    <button type="button" (click)="goBack()">go back</button>
-  </div> -->
-
-
   <div class="container">
   <form  [formGroup]="formTask">
 
@@ -34,17 +22,20 @@
         <input matInput [matDatepicker]="picker" formControlName="date">
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="f.date.errors?.required">Date is required</mat-error>
       </mat-form-field>
     </div>
 
-    <mat-form-field>
-      <mat-label>Status</mat-label>
-      <mat-select formControlName="status">
-        <mat-option *ngFor="let status of taskStatus" [value]="status.value" >
-          {{status.value}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div *ngIf="isEditar">
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let status of taskStatus" [value]="status.value" >
+            {{status.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
     <div fxLayoutAlign="center center">
       <button mat-button color="default" (click)="goBack()">Voltar</button>

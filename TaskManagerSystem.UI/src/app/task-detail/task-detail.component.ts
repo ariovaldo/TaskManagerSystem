@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { delay } from 'rxjs/operators';
 
 import { TaskService } from '../services/task.service';
 import { TaskStatus } from '../models/task-status';
@@ -29,7 +30,7 @@ export class TaskDetailComponent implements OnInit {
     this.formTask = this.fb.group({
       title:['', Validators.required],
       description:[''],
-      date:[],
+      date:['', Validators.required],
       status:[null]
     });
   }
@@ -63,9 +64,11 @@ export class TaskDetailComponent implements OnInit {
     if (this.isEditar) {
       this.formTask.value.id = this.id;
       this.taskService.updateTask(this.formTask.value)
+      .pipe(delay(1000))
       .subscribe(() => this.goBack());
     } else {
       this.taskService.addTask(this.formTask.value)
+      .pipe(delay(1000))
       .subscribe(() => this.goBack());
     }
   }
@@ -75,5 +78,4 @@ export class TaskDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
 }
