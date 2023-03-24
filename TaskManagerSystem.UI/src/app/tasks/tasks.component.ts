@@ -20,6 +20,7 @@ export class TasksComponent implements OnInit{
   constructor(private taskService: TaskService, private router:Router) {}
 
   ngOnInit(): void {
+    console.log("on init ->")
     this.getTasks();
   }
 
@@ -31,6 +32,7 @@ export class TasksComponent implements OnInit{
   getTasks(): void {
     this.taskService.getTasks().subscribe(
       tasks => {
+        console.log("getTasks ->", tasks)
         this.tasks = tasks.data;
       }     
     );
