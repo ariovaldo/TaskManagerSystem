@@ -60,8 +60,3 @@ Lembre-se de configurar as credenciais da conexão com o banco de dados, RabbitM
 ```
 
 A aplicação angular estará disponível em http://localhost:4200
-
-
-
-
-a
